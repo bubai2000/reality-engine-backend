@@ -1,0 +1,16 @@
+{
+  "name": "thunder-cracker-node",
+  "version": "0.0.1",
+  "description": "Fact checker backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Team Thunder Cracker",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.0",
+    "dotenv": "^16.3.1",
+    "google-auth-library": "^9.0.0"
+  }
+}
