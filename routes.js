@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 router.post('/', async function (req, res) {
     try {
         const response = await main(req.body.statement);
-        res.status(200).send(response);
+        res.status(200).send({ response });
     } catch (e) {
         console.log(e);
         res.send('Some error occured!', e);
