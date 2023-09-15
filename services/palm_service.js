@@ -1,23 +1,8 @@
-// import { config } from "dotenv";
-const { config } = require('dotenv');
-const { GoogleAuth } = require('google-auth-library');
 const axios = require('axios');
-
-
-config({
-    path: 'environments/.env'
-})
-async function retieveAccessToken() {
-    const auth = new GoogleAuth({ scopes: 'https://www.googleapis.com/auth/cloud-platform' });
-    process.env.ACCESS_TOKEN = await auth.getAccessToken();
-}
-
-
+const { retieveAccessToken } = require('./auth_token_generator');
 
 async function main(statement) {
-
     await retieveAccessToken();
-
     const requestBody = {
         "instances": [
             {
@@ -26,7 +11,8 @@ async function main(statement) {
                 "messages": [
                     {
                         "author": "user",
-                        "content": `I am going to provide you a statement. You will determing if it's true or false. Then you will return me a JSON with 3 fields. First if the statement is true or false in string format, second if it's false then what is closest correct explanation else null, third if there exists any supporting URL else null. The statement is ${statement}`
+                        // "content": `I am going to provide you a statement. You will determing if it's true or false. Then you will return me a JSON with 3 fields. First if the statement is true or false in string format, second if it's false then what is closest correct explanation else null, third if there exists any supporting URL else null. The statement is ${statement}`
+                        "content": `I am going to provide you a statement. You will determine the credibility of the statement. Then you will return me a JSON with 3 fields. First the credibility score of the statement in percentage labelled as confidence, second if confidence is less than 50 percent then what is closest correct explanation else null, third if confidence is less than 50 percent then an URL against the statement else null. The statement is ${statement}`
                     },
                 ]
             }
